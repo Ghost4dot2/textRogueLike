@@ -27,12 +27,22 @@ void Room::interactWithWall(char interactDirection)
 
 std::string Room::getDescription()
 {
-	return description;
+	return this->description;
+}
+
+std::string Room::getRoomName()
+{
+	return this->roomName;
 }
 
 void Room::setDescription(std::string roomDescription)
 {
-	description = roomDescription;
+	this->description = roomDescription;
+}
+
+void Room::setRoomName(std::string name)
+{
+	this->roomName = name;
 }
 
 void Room::setWallAs(Direction wallSide, Wall* newWall)

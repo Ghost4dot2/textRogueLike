@@ -7,6 +7,15 @@ class Wall
 private:
 	std::string wallDescription;
 public:
+	Wall()
+	{
+		wallDescription = "";
+	}
+	Wall(std::string description)
+	{
+		wallDescription = description;
+	}
+
 	virtual void interact()
 	{
 		std::cout << "This is a wall" << std::endl;

@@ -8,6 +8,7 @@ class Room
 	enum class Direction { NORTH, SOUTH, EAST, WEST };
 
 private:
+	std::string roomName;
 	std::string description;
 	Wall* North;
 	Wall* South;
@@ -35,8 +36,10 @@ public:
 
 	void interactWithWall(char interactDirection);
 	std::string getDescription();
+	std::string getRoomName();
 	
 	void setDescription(std::string roomDescription);
+	void setRoomName(std::string name);
 	void setWallAs(Direction wallSide, Wall* newWall);
 	
 
