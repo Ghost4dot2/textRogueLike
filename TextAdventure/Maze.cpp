@@ -10,7 +10,7 @@ char Maze::getInput()
 
 void Maze::traverseMaze()
 {
-	if (roomArray)
+	if (RoomMap.size() != 0)
 	{
 		std::cout << "Hello and welcome to the Text Adventure!" << std::endl;
 		std::cout << "Use wasd to navigate through the rooms\n\n" << std::endl;
@@ -19,9 +19,9 @@ void Maze::traverseMaze()
 		char command = 'm';
 		while (command != 'q')
 		{
-			roomArray[this->currentRoom].getDescription();
+			RoomMap[this->currentRoom].getDescription();
 			command = getInput();
-			roomArray[this->currentRoom].interactWithWall(command);
+			RoomMap[this->currentRoom].interactWithWall(command);
 		}
 	}
 	else
@@ -31,11 +31,22 @@ void Maze::traverseMaze()
 }
 
 
-Room* Maze::getRoom(int index)
+Room Maze::getRoom(std::string roomName)
 {
-	if (roomArray && index < numberOfRooms)
-	{
-		return &roomArray[index];
-	}
+	std::map<std::string, Room>::iterator it;
+	it = RoomMap.find(roomName);
+	if (it != RoomMap.end())
+		return it->second;
+
 }
 
+void Maze::addRoom(std::string name, std::string description)
+{
+	Room* aNewRoom = new Room(name, description);
+	this->addRoom(aNewRoom);
+}
+
+void Maze::addRoom(Room* aRoom)
+{
+	this->RoomMap[aRoom->getRoomName()] = *aRoom;
+}

@@ -9,27 +9,22 @@
 class Maze
 {
 private:
-	Room* roomArray;
+	std::map<std::string, Room> RoomMap;
 	int numberOfRooms;
-	int currentRoom;
+	std::string currentRoom;
 
 	char getInput();
 public:
 	Maze()
 	{
-		roomArray = NULL;
 		numberOfRooms = 0;
-		currentRoom = 0;
+		currentRoom = "";
 	}
-	Maze(int howManyRooms)
-	{
-		roomArray = new Room[howManyRooms];
-		numberOfRooms = howManyRooms;
-		currentRoom = 0;
-	}
-	void traverseMaze();
-	Room* getRoom(int index);
 
+	void traverseMaze();
+	Room getRoom(std::string roomName);
+	void addRoom(std::string name, std::string description);
+	void addRoom(Room* aRoom);
 
 
 };

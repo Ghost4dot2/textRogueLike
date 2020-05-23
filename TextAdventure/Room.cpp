@@ -45,24 +45,59 @@ void Room::setRoomName(std::string name)
 	this->roomName = name;
 }
 
-void Room::setWallAs(Direction wallSide, Wall* newWall)
+Room::Direction Room::getOppositeWall(Room::Direction wallSide)
 {
 	switch (wallSide)
 	{
 	case Room::Direction::NORTH:
-		North = newWall;
+		return Room::Direction::SOUTH;
 		break;
 	case Room::Direction::SOUTH:
-		South = newWall;
+		return Room::Direction::NORTH;
 		break;
 	case Room::Direction::EAST:
-		East = newWall;
+		return Room::Direction::WEST;
 		break;
 	case Room::Direction::WEST:
-		West = newWall;
+		return Room::Direction::EAST;
 		break;
 	default:
 		break;
 	}
 }
 
+void Room::setWallAs(Direction wallSide, Wall* newWall)
+{
+	Wall* temp = NULL;
+	switch (wallSide)
+	{
+	case Room::Direction::NORTH:
+		temp = North;
+		North = newWall;
+		break;
+	case Room::Direction::SOUTH:
+		temp = South;
+		South = newWall;
+		break;
+	case Room::Direction::EAST:
+		temp = East;
+		East = newWall;
+		break;
+	case Room::Direction::WEST:
+		temp = West;
+		West = newWall;
+		break;
+	default:
+		break;
+	}
+	if (temp)
+		delete temp;
+}
+/*
+void Room::connectRoom(Direction wallSide, Room* nextRoom)
+{
+	myDoor* DoorTo = new myDoor("Sturdy Oak Door", this, nextRoom, SIDE::PUSH);
+	myDoor* DoorFrom = new myDoor("Sturdy Oak Door", this, nextRoom, SIDE::PULL);
+	this->setWallAs(wallSide, DoorTo);
+	nextRoom->setWallAs(nextRoom->getOppositeWall(wallSide), DoorFrom);
+}*/
